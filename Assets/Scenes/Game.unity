@@ -819,24 +819,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapes:
-  - cells: []
+  - cells:
+    - {x: 0, y: 0}
+    - {x: -1, y: 0}
+    - {x: 1, y: 1}
+    - {x: 0, y: 1}
     shape: 0
     tile: {fileID: 11400000, guid: 064e108bfe0f5d24fac776bd963332dc, type: 2}
-  - cells: []
+  - cells:
+    - {x: 1, y: 0}
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: -1, y: 1}
     shape: 1
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
-  - cells: []
+  - cells:
+    - {x: 1, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
     shape: 2
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
-  - cells: []
+  - cells:
+    - {x: 1, y: 0}
+    - {x: 0, y: 0}
+    - {x: -1, y: 0}
+    - {x: -1, y: 1}
     shape: 3
     tile: {fileID: 11400000, guid: 064e108bfe0f5d24fac776bd963332dc, type: 2}
-  - cells: []
+  - cells:
+    - {x: 0, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
     shape: 4
     tile: {fileID: 11400000, guid: d053a6f0f09a9ae43a33e74cf343c6bf, type: 2}
-  - cells: []
+  - cells:
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
     shape: 5
     tile: {fileID: 11400000, guid: d053a6f0f09a9ae43a33e74cf343c6bf, type: 2}
-  - cells: []
+  - cells:
+    - {x: -1, y: 1}
+    - {x: 0, y: 0}
+    - {x: 1, y: 1}
+    - {x: 2, y: 1}
     shape: 6
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
+  spawnPosition: {x: 0, y: 0, z: 0}

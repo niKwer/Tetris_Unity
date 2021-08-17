@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 1595763488}
   - component: {fileID: 1595763487}
   - component: {fileID: 1595763489}
+  - component: {fileID: 1595763490}
   m_Layer: 0
   m_Name: GameBoard
   m_TagString: Untagged
@@ -820,17 +821,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shapes:
   - cells:
-    - {x: 0, y: 0}
-    - {x: -1, y: 0}
-    - {x: 1, y: 1}
     - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
     shape: 0
     tile: {fileID: 11400000, guid: 064e108bfe0f5d24fac776bd963332dc, type: 2}
   - cells:
-    - {x: 1, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 1}
     - {x: -1, y: 1}
+    - {x: 0, y: 1}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
     shape: 1
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
   - cells:
@@ -841,10 +842,10 @@ MonoBehaviour:
     shape: 2
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
   - cells:
-    - {x: 1, y: 0}
-    - {x: 0, y: 0}
-    - {x: -1, y: 0}
     - {x: -1, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
     shape: 3
     tile: {fileID: 11400000, guid: 064e108bfe0f5d24fac776bd963332dc, type: 2}
   - cells:
@@ -857,15 +858,28 @@ MonoBehaviour:
   - cells:
     - {x: 0, y: 1}
     - {x: 1, y: 1}
-    - {x: -1, y: 0}
     - {x: 0, y: 0}
+    - {x: 1, y: 0}
     shape: 5
     tile: {fileID: 11400000, guid: d053a6f0f09a9ae43a33e74cf343c6bf, type: 2}
   - cells:
     - {x: -1, y: 1}
-    - {x: 0, y: 0}
+    - {x: 0, y: 1}
     - {x: 1, y: 1}
     - {x: 2, y: 1}
     shape: 6
     tile: {fileID: 11400000, guid: 6a5c4d247ee30564090df137a00fff44, type: 2}
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: -1, y: 8, z: 0}
+  boardSize: {x: 10, y: 20}
+--- !u!114 &1595763490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595763486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7ea515ff3e6a248a23d6a56f6d32f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

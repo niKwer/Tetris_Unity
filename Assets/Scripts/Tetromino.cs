@@ -46,7 +46,12 @@ public class Tetromino : MonoBehaviour
         {
             Move(Vector2Int.down);
         }
-        this.board.Set(this);
+        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            HardDrop();
+        }
+        this.board.SetTetromino(this);
     }
 
     private void Rotate(int direction)
@@ -114,5 +119,12 @@ public class Tetromino : MonoBehaviour
         }
 
         return isValid;
+    }
+    private void HardDrop()
+    {
+        while (Move(Vector2Int.down))
+        {
+            continue;
+        }
     }
 }

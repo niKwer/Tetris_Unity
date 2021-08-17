@@ -34,10 +34,10 @@ public class TetrisBoard : MonoBehaviour
         int random = Random.Range(0, this.shapes.Length);
         ShapeData shapeData = this.shapes[random];
         this.currentTetromino.Initialize(spawnPosition, shapeData, this);
-        Set(this.currentTetromino);
+        SetTetromino(this.currentTetromino);
     }
 
-    public void Set(Tetromino tetromino)
+    public void SetTetromino(Tetromino tetromino)
     {
         for (int i = 0; i < tetromino.cells.Length; i++)
         {

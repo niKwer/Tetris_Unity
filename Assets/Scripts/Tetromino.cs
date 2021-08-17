@@ -59,6 +59,38 @@ public class Tetromino : MonoBehaviour
         int originalRotation = this.rotationIndex;
         this.rotationIndex = Wrap(this.rotationIndex + direction, 0, 4);
         RotationMethod(direction);
+        if (!TestWallKicks(this.rotationIndex, direction))
+        {
+            this.rotationIndex = originalRotation;
+            RotationMethod(-direction);
+        }
+    }
+
+
+    private bool TestWallKicks(int rotationIndex, int rotationDirection)
+    {
+        int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
+
+        for (int i = 0; i < this.shapeData.wallKicks.GetLength(1); i++)
+        {
+            Vector2Int translation = this.shapeData.wallKicks[wallKickIndex, i];
+
+            if (Move(translation))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int GetWallKickIndex(int rotationIndex, int rotationDirection)
+    {
+        int wallKickIndex = rotationIndex * 2;
+        if (rotationIndex < 0)
+        {
+            wallKickIndex--;
+        }
+        return Wrap(wallKickIndex, 0, this.shapeData.wallKicks.GetLength(0));
     }
 
     private void RotationMethod(int direction)

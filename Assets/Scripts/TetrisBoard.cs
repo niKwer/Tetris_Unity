@@ -28,6 +28,10 @@ public class TetrisBoard : MonoBehaviour
     {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.currentTetromino = GetComponentInChildren<Tetromino>();
+        for (int i = 0; i < this.shapes.Length; i++)
+        {
+            this.shapes[i].InitializeWallKicks();
+        }
     }
     private void SpawnTetromino()
     {

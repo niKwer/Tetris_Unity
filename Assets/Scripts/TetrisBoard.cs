@@ -19,11 +19,6 @@ public class TetrisBoard : MonoBehaviour
             return new RectInt(position, this.boardSize);
         }
     }
-
-    private void Start()
-    {
-        SpawnTetromino();
-    }
     public void Awake()
     {
         this.tilemap = GetComponentInChildren<Tilemap>();
@@ -33,12 +28,29 @@ public class TetrisBoard : MonoBehaviour
             this.shapes[i].InitializeWallKicks();
         }
     }
-    private void SpawnTetromino()
+    private void Start()
+    {
+        SpawnTetromino();
+    }
+    public void SpawnTetromino()
     {
         int random = Random.Range(0, this.shapes.Length);
         ShapeData shapeData = this.shapes[random];
         this.currentTetromino.Initialize(spawnPosition, shapeData, this);
-        SetTetromino(this.currentTetromino);
+
+        if(IsValidPosition(this.currentTetromino,this.spawnPosition))
+        {
+            SetTetromino(this.currentTetromino);
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        this.tilemap.ClearAllTiles();
     }
 
     public void SetTetromino(Tetromino tetromino)
@@ -76,5 +88,63 @@ public class TetrisBoard : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void ClearLines()
+    {
+        RectInt bounds = this.Bounds;
+        int row = bounds.yMin;
+
+        while(row<bounds.yMax)
+        {
+            if(IsLineFull(row))
+            {
+                LineClear(row);
+            }
+            else
+            {
+                row++;
+            }
+        }
+    }
+
+    private bool IsLineFull(int row)
+    {
+        RectInt bounds = this.Bounds;
+        for(int col=bounds.xMin; col<bounds.xMax;col++)
+        {
+            Vector3Int position = new Vector3Int(col, row, 0);
+
+            if(!this.tilemap.HasTile(position))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private void LineClear(int row)
+    {
+        RectInt bounds = this.Bounds;
+
+        for (int col = bounds.xMin; col < bounds.xMax; col++)
+        {
+            Vector3Int position = new Vector3Int(col, row, 0);
+            this.tilemap.SetTile(position, null);
+        }
+        
+        while(row<bounds.yMax)
+        {
+            for (int col = bounds.xMin; col < bounds.xMax; col++)
+            {
+                Vector3Int position = new Vector3Int(col, row + 1, 0);
+                TileBase above = this.tilemap.GetTile(position);
+
+                position = new Vector3Int(col, row, 0);
+                this.tilemap.SetTile(position, above);
+            }
+
+            row++;
+        }
     }
 }

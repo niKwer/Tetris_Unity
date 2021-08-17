@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Tetromino : MonoBehaviour
@@ -10,12 +11,20 @@ public class Tetromino : MonoBehaviour
     public Vector3Int[] cells { get; private set; }
     public TetrisBoard board { get; private set; }
     public int rotationIndex { get; private set; }
+
+    public float stepDelay = 1f;
+    public float lockDelay = 0.5f;
+
+    private float stepTime;
+    private float lockTime;
     public void Initialize(Vector3Int position, ShapeData shapeData, TetrisBoard board)
     {
         this.shapeData = shapeData;
         this.board = board;
         this.position = position;
         this.rotationIndex = 0;
+        this.stepTime = Time.time + this.stepDelay;
+        this.lockTime = 0.5f;
 
         if (this.cells == null)
             this.cells = new Vector3Int[shapeData.cells.Length];
@@ -25,11 +34,11 @@ public class Tetromino : MonoBehaviour
             this.cells[i] = (Vector3Int)shapeData.cells[i];
         }
     }
-
     private void Update()
     {
         this.board.Clear(this);
-        if(Input.GetButtonDown("Rotate"))
+        this.lockTime += Time.deltaTime;
+        if (Input.GetButtonDown("Rotate"))
         {
             Rotate(1);
         }
@@ -50,6 +59,10 @@ public class Tetromino : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             HardDrop();
+        }
+        if (Time.time > this.stepTime)
+        {
+            Step();
         }
         this.board.SetTetromino(this);
     }
@@ -148,15 +161,42 @@ public class Tetromino : MonoBehaviour
         if (isValid)
         {
             this.position = newPosition;
+            this.lockTime = 0f;
         }
 
         return isValid;
     }
+    private void Step()
+    {
+        this.stepTime = Time.time + this.stepDelay;
+
+        // Do not move down if the player is already holding down
+        // otherwise it can cause a double movement
+        if (!Input.GetKey(KeyCode.S))
+        {
+            Move(Vector2Int.down);
+        }
+
+        // Once the piece has been inactive for too long it becomes locked
+        if (this.lockTime >= this.lockDelay)
+        {
+            Lock();
+        }
+    }
+
+    private void Lock()
+    {
+        this.board.SetTetromino(this);
+        this.board.ClearLines();
+        this.board.SpawnTetromino();
+    }
+
     private void HardDrop()
     {
         while (Move(Vector2Int.down))
         {
             continue;
         }
+        Lock();
     }
 }

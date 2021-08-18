@@ -169,15 +169,10 @@ public class Tetromino : MonoBehaviour
     private void Step()
     {
         this.stepTime = Time.time + this.stepDelay;
-
-        // Do not move down if the player is already holding down
-        // otherwise it can cause a double movement
         if (!Input.GetKey(KeyCode.S))
         {
             Move(Vector2Int.down);
         }
-
-        // Once the piece has been inactive for too long it becomes locked
         if (this.lockTime >= this.lockDelay)
         {
             Lock();

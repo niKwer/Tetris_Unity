@@ -8,8 +8,11 @@ public class TetrisBoard : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Tetromino currentTetromino { get; private set; }
     public ShapeData[] shapes;
+    public Next nextBoard;
+    [SerializeField]  public GameSession gameSession;
     public Vector3Int spawnPosition;
     public Vector2Int boardSize = new Vector2Int(10, 20);
+    private int nextValue;
 
     public RectInt Bounds
     {
@@ -23,6 +26,8 @@ public class TetrisBoard : MonoBehaviour
     {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.currentTetromino = GetComponentInChildren<Tetromino>();
+        this.gameSession = FindObjectOfType<GameSession>();
+        this.nextBoard = FindObjectOfType<Next>();
         for (int i = 0; i < this.shapes.Length; i++)
         {
             this.shapes[i].InitializeWallKicks();
@@ -30,12 +35,22 @@ public class TetrisBoard : MonoBehaviour
     }
     private void Start()
     {
-        SpawnTetromino();
+        FirstSpawn();
     }
-    public void SpawnTetromino()
+
+    private void FirstSpawn()
     {
         int random = Random.Range(0, this.shapes.Length);
         ShapeData shapeData = this.shapes[random];
+        this.currentTetromino.Initialize(spawnPosition, shapeData, this);
+
+        nextValue = Random.Range(0, this.shapes.Length);
+        nextBoard.InitializeNextTetromino(this.shapes[nextValue], this);
+    }
+
+    public void SpawnTetromino()
+    {
+        ShapeData shapeData = this.shapes[nextValue];
         this.currentTetromino.Initialize(spawnPosition, shapeData, this);
 
         if(IsValidPosition(this.currentTetromino,this.spawnPosition))
@@ -46,6 +61,8 @@ public class TetrisBoard : MonoBehaviour
         {
             GameOver();
         }
+        nextValue= Random.Range(0, this.shapes.Length);
+        nextBoard.InitializeNextTetromino(this.shapes[nextValue], this);
     }
 
     private void GameOver()
@@ -94,11 +111,12 @@ public class TetrisBoard : MonoBehaviour
     {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
-
+        int countCleaningLines = 0;
         while(row<bounds.yMax)
         {
             if(IsLineFull(row))
             {
+                countCleaningLines++;
                 LineClear(row);
             }
             else
@@ -106,6 +124,7 @@ public class TetrisBoard : MonoBehaviour
                 row++;
             }
         }
+        gameSession.AddScore(countCleaningLines);
     }
 
     private bool IsLineFull(int row)

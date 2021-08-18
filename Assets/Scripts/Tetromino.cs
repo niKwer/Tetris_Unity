@@ -24,7 +24,7 @@ public class Tetromino : MonoBehaviour
         this.position = position;
         this.rotationIndex = 0;
         this.stepTime = Time.time + this.stepDelay;
-        this.lockTime = 0.5f;
+        this.lockTime = 0f;
 
         if (this.cells == null)
             this.cells = new Vector3Int[shapeData.cells.Length];
@@ -169,11 +169,9 @@ public class Tetromino : MonoBehaviour
     private void Step()
     {
         this.stepTime = Time.time + this.stepDelay;
-        if (!Input.GetKey(KeyCode.S))
-        {
-            Move(Vector2Int.down);
-        }
-        if (this.lockTime >= this.lockDelay)
+
+        Move(Vector2Int.down);
+        if (this.lockTime >= this.lockDelay && !Move(Vector2Int.down))
         {
             Lock();
         }

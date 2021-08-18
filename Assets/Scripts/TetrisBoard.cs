@@ -35,6 +35,7 @@ public class TetrisBoard : MonoBehaviour
     }
     private void Start()
     {
+        SetAllStaticTetrominoes();
         FirstSpawn();
     }
 
@@ -43,6 +44,7 @@ public class TetrisBoard : MonoBehaviour
         int random = Random.Range(0, this.shapes.Length);
         ShapeData shapeData = this.shapes[random];
         this.currentTetromino.Initialize(spawnPosition, shapeData, this);
+        gameSession.AddCurrentTetromino(shapeData);
 
         nextValue = Random.Range(0, this.shapes.Length);
         nextBoard.InitializeNextTetromino(this.shapes[nextValue], this);
@@ -55,6 +57,7 @@ public class TetrisBoard : MonoBehaviour
 
         if(IsValidPosition(this.currentTetromino,this.spawnPosition))
         {
+            gameSession.AddCurrentTetromino(shapeData);
             SetTetromino(this.currentTetromino);
         }
         else
@@ -164,6 +167,20 @@ public class TetrisBoard : MonoBehaviour
             }
 
             row++;
+        }
+    }
+
+    private void SetAllStaticTetrominoes()
+    {
+        Vector3Int position = new Vector3Int(-14, 7, 0);
+        for (int i = 0; i < shapes.Length; i++)
+        {
+            for (int j = 0; j < shapes[i].cells.Length; j++)
+            {
+                Vector3Int tilePosition = (Vector3Int)shapes[i].cells[j] + position;
+                this.tilemap.SetTile(tilePosition, shapes[i].tile);
+            }
+            position.y -= 3;
         }
     }
 }

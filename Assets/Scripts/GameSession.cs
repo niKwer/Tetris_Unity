@@ -5,20 +5,100 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI levelText;
-    [SerializeField] TextMeshProUGUI linesText;
+    [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI levelText;
+    [SerializeField] public TextMeshProUGUI linesText;
+    [SerializeField] public TextMeshProUGUI textS;
+    [SerializeField] public TextMeshProUGUI textZ;
+    [SerializeField] public TextMeshProUGUI textL;
+    [SerializeField] public TextMeshProUGUI textJ;
+    [SerializeField] public TextMeshProUGUI textT;
+    [SerializeField] public TextMeshProUGUI textO;
+    [SerializeField] public TextMeshProUGUI textI;
 
-    [SerializeField] int currentScore = 0;
-    [SerializeField] int currentLevel = 0;
-    [SerializeField] int cleaningLines = 0;
-    [SerializeField] int linesForLevel = 0;
+    private int valueS = 0;
+    private int valueZ = 0;
+    private int valueL = 0;
+    private int valueJ = 0;
+    private int valueT = 0;
+    private int valueO = 0;
+    private int valueI = 0;
+
+    private int currentScore = 0;
+    private int currentLevel = 0;
+    private int cleaningLines = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
         ShowCleaningLines(cleaningLines);
         ShowLevel(currentLevel);
         ShowScore(currentScore);
+    }
+
+    public void AddCurrentTetromino(ShapeData shapeData)
+    {
+        switch(shapeData.shape)
+        {
+            case Shape.S:
+                AddShapeS();
+                break;
+            case Shape.Z:
+                AddShapeZ();
+                break;
+            case Shape.L:
+                AddShapeL();
+                break;
+            case Shape.J:
+                AddShapeJ();
+                break;
+            case Shape.T:
+                AddShapeT();
+                break;
+            case Shape.O:
+                AddShapeO();
+                break;
+            case Shape.I:
+                AddShapeI();
+                break;
+
+        }
+    }
+
+    private void AddShapeS()
+    {
+        valueS++;
+        textS.text = (valueS + 1000).ToString().Substring(1);
+    }
+    private void AddShapeZ()
+    {
+        valueZ++;
+        textZ.text = (valueZ + 1000).ToString().Substring(1);
+    }
+    private void AddShapeL()
+    {
+        valueL++;
+        textL.text = (valueL + 1000).ToString().Substring(1);
+    }
+    private void AddShapeJ()
+    {
+        valueJ++;
+        textJ.text = (valueJ + 1000).ToString().Substring(1);
+    }
+    private void AddShapeT()
+    {
+        valueT++;
+        textT.text = (valueT + 1000).ToString().Substring(1);
+    }
+    private void AddShapeO()
+    {
+        valueO++;
+        textO.text = (valueO + 1000).ToString().Substring(1);
+    }
+    private void AddShapeI()
+    {
+        valueI++;
+        textI.text = (valueI + 1000).ToString().Substring(1);
     }
 
     public void AddScore(int countLines)
@@ -47,7 +127,6 @@ public class GameSession : MonoBehaviour
         if (cleaningLines + countLines >= 10)
         {
             NextLevel();
-            linesForLevel += countLines - 10;
             cleaningLines += countLines;
         }
         else

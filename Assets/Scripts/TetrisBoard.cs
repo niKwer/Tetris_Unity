@@ -9,7 +9,7 @@ public class TetrisBoard : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Tetromino currentTetromino { get; private set; }
     public ShapeData[] shapes;
-    public Next nextBoard;
+    private Next nextBoard;
     [SerializeField]  public GameSession gameSession;
     public Vector3Int spawnPosition;
     public Vector2Int boardSize = new Vector2Int(10, 20);
@@ -31,6 +31,7 @@ public class TetrisBoard : MonoBehaviour
         this.currentTetromino = GetComponentInChildren<Tetromino>();
         this.gameSession = FindObjectOfType<GameSession>();
         this.nextBoard = FindObjectOfType<Next>();
+
         for (int i = 0; i < this.shapes.Length; i++)
         {
             this.shapes[i].InitializeWallKicks();
@@ -75,6 +76,8 @@ public class TetrisBoard : MonoBehaviour
 
     private void GameOver()
     {
+        if(!isGameOver)
+            FindObjectOfType<AudioManager>().Play("GameOver");
         isGameOver = true;
         gameSession.GameOver();
     }
@@ -138,6 +141,7 @@ public class TetrisBoard : MonoBehaviour
             {
                 row++;
             }
+            if (countCleaningLines > 0) { FindObjectOfType<AudioManager>().Play("Clear"); }
         }
         gameSession.AddScore(countCleaningLines);
     }

@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1288460448892292806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288460448892292824}
+  - component: {fileID: 1288460448892292825}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1288460448892292824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288460448892292806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 695.75397, y: 352.20544, z: -36.28625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1288460448892292825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288460448892292806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbc6ac86f8dd294bb226e24525a476c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: GameOver
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: 1ec69e3581987104d8d99f5051adff9c, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Menu
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: a3e169fc10fbd6a4d965e7a0f674fbd9, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Fall
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: d08550a4f508eec40b8d5503e05cc397, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Clear
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: 98ece383adacd5443964ed734ea43746, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Move
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: ac21025ab423a44418a15dfe00f661f5, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Rotate
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: 87eacfb42fb696b4faec8aa92d80b73d, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Start
+    group: {fileID: 24300002, guid: 9af4277db64af7f44ab51f38b14fba16, type: 2}
+    clip: {fileID: 8300000, guid: 10cf97dd607996045a57077cad175cc6, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

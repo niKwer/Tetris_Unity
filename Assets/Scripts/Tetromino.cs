@@ -11,6 +11,7 @@ public class Tetromino : MonoBehaviour
     public Vector3Int[] cells { get; private set; }
     public TetrisBoard board { get; private set; }
     public int rotationIndex { get; private set; }
+    public AudioManager audioManager;
 
     public float stepDelay = 1f;
     public float lockDelay = 0.5f;
@@ -57,20 +58,24 @@ public class Tetromino : MonoBehaviour
         }
         if (Input.GetButtonDown("MoveRight"))
         {
+            FindObjectOfType<AudioManager>().Play("Move");
             Move(Vector2Int.right);
         }
         else if (Input.GetButtonDown("MoveLeft"))
         {
+            FindObjectOfType<AudioManager>().Play("Move");
             Move(Vector2Int.left);
         }
 
         if (Input.GetButtonDown("MoveDown"))
         {
+            FindObjectOfType<AudioManager>().Play("Move");
             Move(Vector2Int.down);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            FindObjectOfType<AudioManager>().Play("Fall");
             HardDrop();
         }
     }
@@ -85,6 +90,7 @@ public class Tetromino : MonoBehaviour
             this.rotationIndex = originalRotation;
             RotationMethod(-direction);
         }
+        FindObjectOfType<AudioManager>().Play("Rotate");
     }
 
 
@@ -181,6 +187,7 @@ public class Tetromino : MonoBehaviour
         Move(Vector2Int.down);
         if (this.lockTime >= this.lockDelay && !Move(Vector2Int.down))
         {
+            FindObjectOfType<AudioManager>().Play("Lock");
             Lock();
         }
     }

@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public void Awake()
+    {
+        FindObjectOfType<AudioManager>().Play("Menu");
+    }
     public void ExitButton()
     {
         Application.Quit();

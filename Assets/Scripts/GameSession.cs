@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +9,7 @@ public class GameSession : MonoBehaviour
     public GameOverScreen gameOverScreen;
 
     [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI topScoreText;
     [SerializeField] public TextMeshProUGUI levelText;
     [SerializeField] public TextMeshProUGUI linesText;
     [SerializeField] public TextMeshProUGUI textS;
@@ -26,6 +28,7 @@ public class GameSession : MonoBehaviour
     private int valueO = 0;
     private int valueI = 0;
 
+    private int bestScore = 0;
     private int linesForLevel = 0;
     private int currentScore = 0;
     private int currentLevel = 0;
@@ -34,9 +37,11 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bestScore = PlayerPrefs.GetInt("HighScore", 0);
         ShowCleaningLines(cleaningLines);
         ShowLevel(currentLevel);
         ShowScore(currentScore);
+        ShowBestScore(bestScore);
     }
 
     public void AddCurrentTetromino(ShapeData shapeData)
@@ -157,23 +162,47 @@ public class GameSession : MonoBehaviour
 
     private void ShowLevel(int currentLevel)
     {
-        if (currentLevel < 10) { levelText.text = "0" + currentLevel.ToString(); }
-        else { levelText.text = currentLevel.ToString(); }
+        if (currentLevel<100)
+        {
+            levelText.text = (100 + currentScore).ToString().Substring(1);
+        }
+        else
+        {
+            currentLevel = 99;
+            levelText.text = currentLevel.ToString();
+        }
     }
 
     private void ShowScore(int score)
     {
-        if(score<10) { scoreText.text = "00000"+currentScore.ToString(); }
-        else if(score<100) { scoreText.text = "0000" + currentScore.ToString(); }
-        else if(score<1000) { scoreText.text = "000" + currentScore.ToString(); }
-        else if(score<10000) { scoreText.text = "00" + currentScore.ToString(); }
-        else if(score<100000) { scoreText.text = "0" + currentScore.ToString(); }
-        else if(score<1000000) { scoreText.text = currentScore.ToString(); }
-        else { scoreText.text = "999999"; }
+        if(currentScore<1_000_000)
+        {
+            scoreText.text = (1_000_000 + currentScore).ToString().Substring(1);
+        }
+        else
+        {
+            score = 999999;
+            scoreText.text = score.ToString();
+        }
+    }
+
+    private void ShowBestScore(int bestScore)
+    {
+        topScoreText.text=(1000000+bestScore).ToString().Substring(1);
     }
 
     public void GameOver()
     {
         gameOverScreen.Setup(scoreText.text);
+        BestScoreResult();
+    }
+
+    private void BestScoreResult()
+    {
+        if(currentScore> bestScore)
+        {
+            bestScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", currentScore);
+        }
     }
 }

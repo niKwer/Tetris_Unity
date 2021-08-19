@@ -872,7 +872,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2184,6 +2184,30 @@ PrefabInstance:
     - target: {fileID: 1288460448892292824, guid: c610820cc1381364dab93a5336faec1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a289c9ab68fbc9348b300cde2bb1fdaa, type: 3}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ba0b0cf998764934582afc4c59184552, type: 3}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Lock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288460448892292825, guid: c610820cc1381364dab93a5336faec1a, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.04
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c610820cc1381364dab93a5336faec1a, type: 3}

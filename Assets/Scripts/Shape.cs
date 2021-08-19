@@ -13,7 +13,6 @@ public struct ShapeData
     {
         this.wallKicks = WallKicksData.WallKicks[this.shape];
     }
-
 }
 public enum Shape
 {

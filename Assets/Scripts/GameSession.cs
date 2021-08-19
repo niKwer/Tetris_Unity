@@ -7,7 +7,6 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     public GameOverScreen gameOverScreen;
-
     [SerializeField] public TextMeshProUGUI scoreText;
     [SerializeField] public TextMeshProUGUI topScoreText;
     [SerializeField] public TextMeshProUGUI levelText;
@@ -164,7 +163,7 @@ public class GameSession : MonoBehaviour
     {
         if (currentLevel<100)
         {
-            levelText.text = (100 + currentScore).ToString().Substring(1);
+            levelText.text = (100 + currentLevel).ToString().Substring(1);
         }
         else
         {

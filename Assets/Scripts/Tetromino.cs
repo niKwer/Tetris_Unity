@@ -36,8 +36,21 @@ public class Tetromino : MonoBehaviour
     }
     private void Update()
     {
-        this.board.Clear(this);
         this.lockTime += Time.deltaTime;
+        if(!board.IsGameOver())
+        {
+            this.board.Clear(this);
+            Movement();
+        }
+        if (Time.time > this.stepTime)
+        {
+            Step();
+        }
+        this.board.SetTetromino(this);
+    }
+
+    private void Movement()
+    {
         if (Input.GetButtonDown("Rotate"))
         {
             Rotate(1);
@@ -55,16 +68,11 @@ public class Tetromino : MonoBehaviour
         {
             Move(Vector2Int.down);
         }
-        
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             HardDrop();
         }
-        if (Time.time > this.stepTime)
-        {
-            Step();
-        }
-        this.board.SetTetromino(this);
     }
 
     private void Rotate(int direction)

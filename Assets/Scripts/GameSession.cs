@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
+    public GameOverScreen gameOverScreen;
+
     [SerializeField] public TextMeshProUGUI scoreText;
     [SerializeField] public TextMeshProUGUI levelText;
     [SerializeField] public TextMeshProUGUI linesText;
@@ -24,6 +26,7 @@ public class GameSession : MonoBehaviour
     private int valueO = 0;
     private int valueI = 0;
 
+    private int linesForLevel = 0;
     private int currentScore = 0;
     private int currentLevel = 0;
     private int cleaningLines = 0;
@@ -124,13 +127,15 @@ public class GameSession : MonoBehaviour
 
     private void AddCountCleaningLines(int countLines)
     {
-        if (cleaningLines + countLines >= 10)
+        if (linesForLevel + countLines >= 10)
         {
             NextLevel();
+            linesForLevel = linesForLevel+countLines-10;
             cleaningLines += countLines;
         }
         else
         {
+            linesForLevel += countLines;
             cleaningLines += countLines;
         }
         ShowCleaningLines(cleaningLines);
@@ -165,5 +170,10 @@ public class GameSession : MonoBehaviour
         else if(score<100000) { scoreText.text = "0" + currentScore.ToString(); }
         else if(score<1000000) { scoreText.text = currentScore.ToString(); }
         else { scoreText.text = "999999"; }
+    }
+
+    public void GameOver()
+    {
+        gameOverScreen.Setup(scoreText.text);
     }
 }

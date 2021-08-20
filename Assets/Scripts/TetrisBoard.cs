@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class TetrisBoard : MonoBehaviour
 {
-    public GameOverScreen GameOverScreen;
     public Tilemap tilemap { get; private set; }
     public Tetromino currentTetromino { get; private set; }
     public ShapeData[] shapes;

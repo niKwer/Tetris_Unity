@@ -32,7 +32,16 @@ public class GameSession : MonoBehaviour
     private int currentScore = 0;
     private int currentLevel = 0;
     private int cleaningLines = 0;
-    
+
+    private int scoreMin = 0;
+    private int scoreMax = 999_999;
+    private int linesMin = 0;
+    private int linesMax = 999;
+    private int levelMin = 0;
+    private int levelMax = 99;
+    private int tetrominoesMin = 0;
+    private int tetrominoesMax = 999;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,37 +83,37 @@ public class GameSession : MonoBehaviour
 
     private void AddShapeS()
     {
-        valueS++;
+        valueS = Mathf.Clamp(valueS + 1, tetrominoesMin, tetrominoesMax);
         textS.text = (valueS + 1000).ToString().Substring(1);
     }
     private void AddShapeZ()
     {
-        valueZ++;
+        valueZ = Mathf.Clamp(valueZ + 1, tetrominoesMin, tetrominoesMax);
         textZ.text = (valueZ + 1000).ToString().Substring(1);
     }
     private void AddShapeL()
     {
-        valueL++;
+        valueL = Mathf.Clamp(valueL + 1, tetrominoesMin, tetrominoesMax);
         textL.text = (valueL + 1000).ToString().Substring(1);
     }
     private void AddShapeJ()
     {
-        valueJ++;
+        valueJ = Mathf.Clamp(valueJ + 1, tetrominoesMin, tetrominoesMax);
         textJ.text = (valueJ + 1000).ToString().Substring(1);
     }
     private void AddShapeT()
     {
-        valueT++;
+        valueT = Mathf.Clamp(valueT + 1, tetrominoesMin, tetrominoesMax);
         textT.text = (valueT + 1000).ToString().Substring(1);
     }
     private void AddShapeO()
     {
-        valueO++;
+        valueO = Mathf.Clamp(valueO + 1, tetrominoesMin, tetrominoesMax);
         textO.text = (valueO + 1000).ToString().Substring(1);
     }
     private void AddShapeI()
     {
-        valueI++;
+        valueI = Mathf.Clamp(valueI + 1, tetrominoesMin, tetrominoesMax);
         textI.text = (valueI + 1000).ToString().Substring(1);
     }
 
@@ -114,16 +123,16 @@ public class GameSession : MonoBehaviour
         switch (countLines)
         {
             case 1:
-                currentScore += 40 * (currentLevel + 1);
+                currentScore = Mathf.Clamp(currentScore + 40 * (currentLevel + 1), scoreMin, scoreMax);
                 break;
             case 2:
-                currentScore += 100 * (currentLevel + 1);
+                currentScore = Mathf.Clamp(currentScore + 100 * (currentLevel + 1), scoreMin, scoreMax);
                 break;
             case 3:
-                currentScore += 300 * (currentLevel + 1);
+                currentScore = Mathf.Clamp(currentScore + 300 * (currentLevel + 1), scoreMin, scoreMax);
                 break;
             case 4:
-                currentScore += 1200 * (currentLevel + 1);
+                currentScore = Mathf.Clamp(currentScore + 1200 * (currentLevel + 1), scoreMin, scoreMax);
                 break;
         }
         ShowScore(currentScore);
@@ -135,12 +144,12 @@ public class GameSession : MonoBehaviour
         {
             NextLevel();
             linesForLevel = linesForLevel+countLines-10;
-            cleaningLines += countLines;
+            cleaningLines = Mathf.Clamp(cleaningLines + countLines, linesMin, linesMax);
         }
         else
         {
             linesForLevel += countLines;
-            cleaningLines += countLines;
+            cleaningLines = Mathf.Clamp(cleaningLines + countLines, linesMin, linesMax);
         }
         ShowCleaningLines(cleaningLines);
     }
@@ -155,7 +164,7 @@ public class GameSession : MonoBehaviour
 
     private void NextLevel()
     {
-        currentLevel++;
+        currentLevel = Mathf.Clamp(currentLevel + 1, levelMin, levelMax);
         ShowLevel(currentLevel);
     }
 

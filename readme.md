@@ -1,6 +1,6 @@
 # **UnityTetris**
 
-## **WegGL версия игры**
+## **WebGL версия игры**
 
 **[Tetris-unity](https://sharemygame.com/@niKwer/tetris-unity)**
 
